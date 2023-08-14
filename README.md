@@ -24,4 +24,9 @@ This project is part of my college assignment, aiming to provide an intuitive wa
 
 Feel free to clone this repository and explore the WordWise app. If you encounter any issues, please report them in the [Issues](https://github.com/your-username/WordWise/issues) section.
 
+
+## Download the App
+
+You can download and install the WordWise app APK directly from [here](https://drive.google.com/uc?export=download&id=1gLhP1-XAEO_pazC46saIVlUTCFudgch1).
+
 Happy word learning!
