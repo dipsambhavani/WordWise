@@ -1,0 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.WordWise" parent="Theme.Material3.DynamicColors.Dark">
+        <item name="fontFamily">@font/custom_font</item>
+    </style>
+</resources>

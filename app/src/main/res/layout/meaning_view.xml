@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="32dp"
+    android:layout_margin="12dp"
+    android:padding="32dp"
+    android:backgroundTint="?attr/colorSurfaceContainer"
+    app:flow_horizontalGap="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/part_of_speech"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="24sp"
+            tools:ignore="RtlSymmetry"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginVertical="5dp"
+            android:textColor="?attr/colorSecondary"
+            android:text="@string/definition"
+            android:textSize="20sp" />
+        <LinearLayout
+            android:id="@+id/definitions"
+            android:layout_width="match_parent"
+            android:divider="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginVertical="5dp"
+            android:text="@string/synonyms"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="20sp"/>
+        <me.gujun.android.taggroup.TagGroup
+            android:id="@+id/synonyms"
+            app:atg_textColor="?attr/colorPrimary"
+            app:atg_borderColor="@android:color/transparent"
+            app:atg_borderStrokeWidth="0dp"
+            app:atg_backgroundColor="?attr/colorSurfaceContainerHighest"
+            style="@style/TagGroup" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginVertical="5dp"
+            android:text="@string/antonyms"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="20sp"/>
+        <me.gujun.android.taggroup.TagGroup
+            android:id="@+id/antonyms"
+            app:atg_borderStrokeWidth="0dp"
+            app:atg_textColor="?attr/colorPrimary"
+            app:atg_borderColor="@android:color/transparent"
+            app:atg_backgroundColor="?attr/colorSurfaceContainerHighest"
+            style="@style/TagGroup" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
