@@ -22,7 +22,7 @@ This project is part of my college assignment, aiming to provide an intuitive wa
 
 ## Try It Out
 
-Feel free to clone this repository and explore the WordWise app. If you encounter any issues, please report them in the [Issues](https://github.com/your-username/WordWise/issues) section.
+Feel free to clone this repository and explore the WordWise app. If you encounter any issues, please report them in the [Issues](https://github.com/dipsambhavani/WordWise/issues) section.
 
 
 ## Download the App
