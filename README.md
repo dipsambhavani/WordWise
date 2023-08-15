@@ -11,10 +11,15 @@ To run the WordWise app, you need to have Android Studio installed. If you haven
 
 ## Dependencies
 
-The WordWise app utilizes the following repositories and libraries:
+The WordWise app utilizes the following repositories, libraries, and tools:
 
 - [AndroidTagGroup](https://github.com/2dxgujun/AndroidTagGroup.git): A library for creating customizable tag views in Android.
 - [Material Components](https://github.com/material-components/material-components-android/blob/f2ccc116ea2ada7bcb48ce7388a6c927497b25f3/docs/theming/Color.md): Reference material for understanding color themes in Android apps.
+- [ShimmerFrameLayout](https://github.com/facebook/shimmer-android): A Facebook library for adding shimmering effects to Android views.
+
+## Shimmer Effect
+
+WordWise features a sleek shimmering effect powered by the [ShimmerFrameLayout library](https://github.com/facebook/shimmer-android). The shimmer effect adds a touch of elegance to the user interface, enhancing the visual experience when loading data.
 
 ## College Project
 
@@ -24,9 +29,8 @@ This project is part of my college assignment, aiming to provide an intuitive wa
 
 Feel free to clone this repository and explore the WordWise app. If you encounter any issues, please report them in the [Issues](https://github.com/dipsambhavani/WordWise/issues) section.
 
-
 ## Download the App
 
-You can download and install the WordWise app APK directly from [here](https://drive.google.com/uc?export=download&id=1gLhP1-XAEO_pazC46saIVlUTCFudgch1).
+You can download and install the WordWise app APK directly from [here](https://drive.google.com/uc?export=download&id1vzVq30FVDbNYPVL4hBS8FiOJJYZw7Z9M).
 
 Happy word learning!
