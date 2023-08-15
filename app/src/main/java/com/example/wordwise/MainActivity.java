@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.wordwise.adapters.MeaningsAdapter;
 import com.example.wordwise.models.Definition;
 import com.example.wordwise.models.Meaning;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.textfield.TextInputLayout;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    ShimmerFrameLayout shimmer_layout;
     TextInputLayout new_word;
     ListView main_meanings;
     TextView phonetic;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DynamicColors.applyToActivitiesIfAvailable(MainActivity.this.getApplication());
 
+        shimmer_layout = findViewById(R.id.shimmer_layout);
         new_word = findViewById(R.id.new_word);
         main_meanings = findViewById(R.id.main_meanings);
         define_btn = findViewById(R.id.define_btn);
@@ -54,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
         define_btn.setOnClickListener(view -> {
             new_word.clearFocus();
+
+            shimmer_layout.setVisibility(View.VISIBLE);
+            shimmer_layout.startShimmerAnimation();
 
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
@@ -106,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
                         meaning.setAntonyms(antonyms);
                         meanings.add(meaning);
                     }
+
+                    shimmer_layout.stopShimmerAnimation();
+                    shimmer_layout.setVisibility(View.GONE);
                     MeaningsAdapter meaningsAdapter = new MeaningsAdapter(MainActivity.this, meanings);
                     main_meanings.setAdapter(meaningsAdapter);
                 } catch (JSONException | IOException e) {

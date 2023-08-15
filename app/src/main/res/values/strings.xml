@@ -7,4 +7,7 @@
     <string name="antonyms">Antonyms</string>
     <string name="define">define</string>
     <string name="phonetic_sound">phonetic sound</string>
+    <string name="shimmer_phonetic">shimmer phonetic</string>
+    <string name="shimmer_sound_icon">shimmer sound icon</string>
+    <string name="content_shimmer">content shimmer</string>
 </resources>
