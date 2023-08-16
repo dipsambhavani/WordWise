@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     TextView phonetic;
     MaterialButton define_btn;
     ImageButton sound_btn;
+    int i ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, request_string, null, response -> {
                 try {
-                    String phoneticString = response.getJSONObject(0).optString("phonetic");
-
+//                    getting audio of phonetic
                     String link = "";
-                    int i = 0;
+                    i = 0;
                     while (link.equals("")){
                         try {
                             link = response.getJSONObject(0).getJSONArray("phonetics").getJSONObject(i).optString("audio");
@@ -90,7 +90,17 @@ public class MainActivity extends AppCompatActivity {
                         sound.prepareAsync();
                         sound_btn.setVisibility(View.VISIBLE);
                     }
+
+//                    getting phonetic text
+                    String phoneticString = "";
+                    i=0;
+                    while (phoneticString.equals("")){
+                        phoneticString = response.getJSONObject(0).getJSONArray("phonetics").getJSONObject(i).optString("text");
+                        i++;
+                    }
                     phonetic.setText(phoneticString);
+
+//                    getting main descriptions array
                     JSONArray objects = response.getJSONObject(0).getJSONArray("meanings");
                     ArrayList<Meaning> meanings = new ArrayList<>();
                     for (i = 0; i < objects.length(); i++) {
