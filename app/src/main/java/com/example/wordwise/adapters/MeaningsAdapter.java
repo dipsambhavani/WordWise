@@ -41,7 +41,9 @@ public class MeaningsAdapter extends ArrayAdapter<Meaning> {
         Meaning meaning = getItem(position);
         TextView part_of_speech = listitemView.findViewById(R.id.part_of_speech);
         LinearLayout definitions = listitemView.findViewById(R.id.definitions);
+        TextView synonyms_title = listitemView.findViewById(R.id.synonyms_title);
         TagGroup synonyms = listitemView.findViewById(R.id.synonyms);
+        TextView antonyms_title = listitemView.findViewById(R.id.antonyms_title);
         TagGroup antonyms = listitemView.findViewById(R.id.antonyms);
 
         assert meaning != null;
@@ -64,8 +66,15 @@ public class MeaningsAdapter extends ArrayAdapter<Meaning> {
             definitions.addView(img);
         }
 
-        synonyms.setTags(synonyms_list);
-        antonyms.setTags(antonyms_list);
+        if (!synonyms_list.isEmpty()){
+            synonyms_title.setVisibility(View.VISIBLE);
+            synonyms.setTags(synonyms_list);
+        }
+
+        if (!antonyms_list.isEmpty()){
+            antonyms_title.setVisibility(View.VISIBLE);
+            antonyms.setTags(antonyms_list);
+        }
 
         return listitemView;
     }

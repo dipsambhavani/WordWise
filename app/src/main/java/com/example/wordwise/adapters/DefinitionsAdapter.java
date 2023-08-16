@@ -37,6 +37,7 @@ public class DefinitionsAdapter extends ArrayAdapter<Definition> {
         definition.setText(def.getDefinition());
         TextView example = listitemView.findViewById(R.id.example);
         if (!def.getExample().equals("")){
+            example.setVisibility(View.VISIBLE);
             example.setText('"'+ def.getExample() +'"');
         }
 
