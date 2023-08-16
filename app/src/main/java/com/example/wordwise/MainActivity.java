@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
 
-            String word = Objects.requireNonNull(Objects.requireNonNull(new_word.getEditText()).getText()).toString();
+            String word = Objects.requireNonNull(Objects.requireNonNull(new_word.getEditText()).getText()).toString().trim();
             String request_string = "https://api.dictionaryapi.dev/api/v2/entries/en/" + word;
 
 
@@ -72,19 +72,28 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String phoneticString = response.getJSONObject(0).optString("phonetic");
 
-                    String link = response.getJSONObject(0).getJSONArray("phonetics").getJSONObject(0).optString("audio");
-
-                    MediaPlayer sound = new MediaPlayer();
-                    sound.setDataSource(link);
-                    sound.setOnPreparedListener(mediaPlayer -> sound_btn.setOnClickListener(view1 -> mediaPlayer.start()));
-                    sound.prepareAsync();
-
-                    sound_btn.setVisibility(View.VISIBLE);
-
+                    String link = "";
+                    int i = 0;
+                    while (link.equals("")){
+                        try {
+                            link = response.getJSONObject(0).getJSONArray("phonetics").getJSONObject(i).optString("audio");
+                        } catch (Exception ignored){
+                            Toast.makeText(MainActivity.this, "Something in audio went wrong!!!", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                        i++;
+                    }
+                    if (!link.equals("")){
+                        MediaPlayer sound = new MediaPlayer();
+                        sound.setDataSource(link);
+                        sound.setOnPreparedListener(mediaPlayer -> sound_btn.setOnClickListener(view1 -> mediaPlayer.start()));
+                        sound.prepareAsync();
+                        sound_btn.setVisibility(View.VISIBLE);
+                    }
                     phonetic.setText(phoneticString);
                     JSONArray objects = response.getJSONObject(0).getJSONArray("meanings");
                     ArrayList<Meaning> meanings = new ArrayList<>();
-                    for (int i = 0; i < objects.length(); i++) {
+                    for (i = 0; i < objects.length(); i++) {
                         JSONObject object = objects.getJSONObject(i);
                         ArrayList<Definition> definitions = new ArrayList<>();
                         JSONArray response_definitions = object.getJSONArray("definitions");
