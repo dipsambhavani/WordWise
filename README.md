@@ -31,6 +31,6 @@ Feel free to clone this repository and explore the WordWise app. If you encounte
 
 ## Download the App
 
-You can download and install the WordWise app APK directly from [here](https://drive.google.com/uc?export=download&id=1vzVq30FVDbNYPVL4hBS8FiOJJYZw7Z9M).
+You can download and install the WordWise app APK directly from [here](https://drive.google.com/uc?export=download&id=18KCRAVW9gvK1Y0h2mNkWCExoLHBexqe8).
 
 Happy word learning!
