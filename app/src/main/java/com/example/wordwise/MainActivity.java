@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
@@ -71,40 +72,39 @@ public class MainActivity extends AppCompatActivity {
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, request_string, null, response -> {
                 try {
-//                    getting audio of phonetic
-                    String link = "";
-                    i = 0;
-                    while (link.equals("")){
-                        try {
-                            link = response.getJSONObject(0).getJSONArray("phonetics").getJSONObject(i).optString("audio");
-                        } catch (Exception ignored){
-                            Toast.makeText(MainActivity.this, "Something in audio went wrong!!!", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                        i++;
-                    }
-                    if (!link.equals("")){
-                        MediaPlayer sound = new MediaPlayer();
-                        sound.setDataSource(link);
-                        sound.setOnPreparedListener(mediaPlayer -> sound_btn.setOnClickListener(view1 -> mediaPlayer.start()));
-                        sound.prepareAsync();
-                        sound_btn.setVisibility(View.VISIBLE);
-                    }
+
+                    JSONArray phoneticsArray = response.getJSONObject(0).getJSONArray("phonetics");
 
 //                    getting phonetic text
                     String phoneticString = "";
-                    i=0;
-                    while (phoneticString.equals("")){
-                        phoneticString = response.getJSONObject(0).getJSONArray("phonetics").getJSONObject(i).optString("text");
-                        i++;
+                    for (i = 0; i < phoneticsArray.length(); i++){
+                        phoneticString = phoneticsArray.getJSONObject(i).optString("text");
+                        if (!phoneticString.equals("")){
+                            phonetic.setText(phoneticString);
+                            break;
+                        }
                     }
-                    phonetic.setText(phoneticString);
 
-//                    getting main descriptions array
-                    JSONArray objects = response.getJSONObject(0).getJSONArray("meanings");
+//                    getting audio of phonetic
+                    String link = "";
+                    for (i = 0; i < phoneticsArray.length(); i++){
+                            link = phoneticsArray.getJSONObject(i).optString("audio");
+                            if (!link.equals("")){
+                                MediaPlayer sound = new MediaPlayer();
+                                sound.setDataSource(link);
+                                sound.setOnPreparedListener(mediaPlayer -> sound_btn.setOnClickListener(view1 -> mediaPlayer.start()));
+                                sound.prepareAsync();
+                                sound_btn.setVisibility(View.VISIBLE);
+                                break;
+                            }
+                    }
+
+
+//                    getting main definitions array
+                    JSONArray meaningsArray = response.getJSONObject(0).getJSONArray("meanings");
                     ArrayList<Meaning> meanings = new ArrayList<>();
-                    for (i = 0; i < objects.length(); i++) {
-                        JSONObject object = objects.getJSONObject(i);
+                    for (i = 0; i < meaningsArray.length(); i++) {
+                        JSONObject object = meaningsArray.getJSONObject(i);
                         ArrayList<Definition> definitions = new ArrayList<>();
                         JSONArray response_definitions = object.getJSONArray("definitions");
                         for (int j = 0; j < response_definitions.length(); j++) {
@@ -139,7 +139,12 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException | IOException e) {
                     throw new RuntimeException(e);
                 }
-            }, error -> Toast.makeText(MainActivity.this, "Something went wrong!!!", Toast.LENGTH_SHORT).show());
+            }, error -> {
+                Toast.makeText(MainActivity.this, "Something went wrong!!!", Toast.LENGTH_SHORT).show();
+                Log.d("Error While API call", error.toString());
+                shimmer_layout.stopShimmerAnimation();
+                shimmer_layout.setVisibility(View.GONE);
+            });
 
             requestQueue.add(jsonArrayRequest);
         });
