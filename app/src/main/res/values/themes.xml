@@ -1,7 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="Base.Theme.WordWise" parent="Theme.Material3.DynamicColors.Light">
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="fontFamily">@font/custom_font</item>
     </style>
+
     <style name="Theme.WordWise" parent="Base.Theme.WordWise" />
+
+    <style name="Theme.WordWise.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
+        <!-- Radius of the outer bound of widgets to make the rounded corners -->
+        <item name="appWidgetRadius">16dp</item>
+        <!--
+        Radius of the inner view's bound of widgets to make the rounded corners.
+        It needs to be 8dp or less than the value of appWidgetRadius
+        -->
+        <item name="appWidgetInnerRadius">8dp</item>
+    </style>
+
+    <style name="Theme.WordWise.AppWidgetContainer" parent="Theme.WordWise.AppWidgetContainerParent">
+        <!-- Apply padding to avoid the content of the widget colliding with the rounded corners -->
+        <item name="appWidgetPadding">16dp</item>
+    </style>
 </resources>
